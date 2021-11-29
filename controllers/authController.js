@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-const {validationResult} = require('express-validator')
+const {validationResult, body, cookie} = require('express-validator')
 const {secret} = require('./../config')
 const jwt = require('jsonwebtoken')
 const generateAccesToken = (login, role) => {
@@ -43,13 +43,17 @@ class authController {
 
     async login(req, res, next) {
         try {
+            console.log(req.body)
             const sql = req.sql
             let request = new sql.Request();
-            const {username, password} = req.body
-            request.input('usernameinput', sql.VarChar(20), username)
+            const {login, password} = req.body
+            request.input('usernameinput', sql.VarChar(20), login)
             const queryResult = await request.query('select login,password,role from [User] where login like @usernameinput')
             console.log(queryResult)
-            const loginFromQuery = queryResult.recordset[0].login
+            if(!queryResult.recordset[0]){
+                return res.status(400).json({message: "Пользователь " + login + " не найден"})
+            }
+               const loginFromQuery = queryResult.recordset[0].login
             if (!loginFromQuery) {
                 return res.status(400).json({message: "Пользователь " + loginFromQuery + " не найден"})
             }
@@ -62,11 +66,13 @@ class authController {
             }
             console.log(roleFromQuery)
             const token = generateAccesToken(loginFromQuery, roleFromQuery)
-            return res.json({token})
+            return   res.cookie('id',token,{signed:true}).json({token})
+            //res.json({token})
+
 
         } catch (e) {
             console.log(e)
-            next(e)
+          return   next(e)
 
         }
     }
