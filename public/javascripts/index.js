@@ -1,35 +1,32 @@
-window.onscroll = function() {myFunction()};
+window.onscroll = function () {
+    myFunction()
+};
 var topnav = document.getElementById("topnav");
-var sticky=topnav.offsetTop;
-var photo=document.getElementById("photos");
-var photoOffset=photo.offsetTop;
-var photoBox=document.getElementById("photoBox");
-var contacts=document.getElementById("contacts");
-var contactsbox=document.getElementById("contactsBox");
+var sticky = topnav.offsetTop;
+var photo = document.getElementById("photos");
+var photoOffset = photo.offsetTop;
+var photoBox = document.getElementById("photoBox");
+var contacts = document.getElementById("contacts");
+var contactsbox = document.getElementById("contactsBox");
 console.log(contacts.offsetTop)
-var contactsOffset=1822 + window.screen.height;
-function myFunction()
-{
-    if(window.pageYOffset>=sticky)
-    {
+var contactsOffset = 1822 + window.screen.height;
+
+function myFunction() {
+    if (window.pageYOffset >= sticky) {
         topnav.classList.add("sticky")
 
-    }else{
+    } else {
         topnav.classList.remove("sticky");
     }
-    if(window.pageYOffset>=photoOffset)
-    {
+    if (window.pageYOffset >= photoOffset) {
         photoBox.classList.add("active")
-    }
-    else{
+    } else {
         photoBox.classList.remove("active")
     }
-    if(window.pageYOffset>=contactsOffset){
+    if (window.pageYOffset >= contactsOffset) {
         contactsbox.classList.add("active")
         photoBox.classList.remove("active")
-    }
-    else
-    {
+    } else {
         contactsBox.classList.remove("active")
     }
 
