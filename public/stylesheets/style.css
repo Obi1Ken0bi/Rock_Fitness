@@ -1,0 +1,108 @@
+
+body{
+  margin: 0;
+  background-color: #EEE2DC;
+  font-family: 'Comfortaa', cursive;
+}
+.header {
+  padding: 20px; /* some padding */
+  text-align: center; /* center the text */
+  background: #EDC7B7;
+  color:  #AC3B61;
+  margin: 0;
+  font-weight:300;
+
+}
+
+.topnav {
+
+  overflow: hidden;
+  align-items: center;
+  background-color:#BAB2B5;
+  width: 100%;
+
+}
+
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color:#123C69;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+
+}
+.topnav p {
+  float: left;
+  color:#123C69;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin:0;
+}
+.topnav form {
+  float: left;
+  color:#123C69;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  margin:0;
+}
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #AC3B61;
+  color: #EDC7B7;
+}
+.topnav-right{
+  float: right;
+}
+.sticky{
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.sticky + .main{
+  padding-top: 60px;
+}
+
+.main{
+  margin-left: 200pt;
+  margin-right: 200pt;
+  font-size:x-large;
+}
+h2{
+  text-align: center;
+  font-weight:900;
+  margin-top: 50px;
+}
+.promo
+{
+  line-height: 35pt;
+}
+img{
+  height: 300px;
+  margin-right: 40px;
+}
+.row{
+  display: flex;
+  justify-content: center;
+
+}
+.contacts
+{
+
+}
+.contacts img{
+  width: auto;
+  height: 200px;
+}
