@@ -30,5 +30,61 @@ async Admin(req,res,next){
    // console.log(recordsAdmins)
     return  res.render('admins',{recordsAdmins:trueAdminList})
 }
+async GetAdminCreate(req,res,next){
+        res.render('adminCreate')
 }
+async PostAdminDelete(req,res,next){
+        try {
+
+            const sql=req.sql
+            const {ID}=req.body
+            const id=req.query
+            const newAdmin=new admin(undefined,undefined,undefined,ID)
+          const error= await newAdmin.delete(sql)
+            if(error){
+                return res.status(400).json({message: "Something went wrong"})
+            }
+             return res.status(200).json({message:'success'})
+
+
+
+        }catch (e) {
+            return res.status(400).json({message: "Something went wrong"})
+        }
+}
+async PostAdminEdit(req,res,next){
+        try {
+            const sql = req.sql
+            const {ID,N_passport, Name, Experience} = req.body
+            const newAdmin = new admin(N_passport, Name, Experience,ID)
+            console.log(newAdmin.id)
+            const error=    await newAdmin.update(sql)
+            if(error){
+                return res.status(400).json({message: "Something went wrong"})
+            }
+            return res.status(200).json({message:'success'})
+        }catch (e) {
+            return res.status(400).json({message: "Something went wrong"})
+        }
+}
+async PostAdminCreate(req,res,next)
+{
+    try {
+
+
+        const sql = req.sql
+        const {N_passport, Name, Experience} = req.body
+        const newAdmin = new admin(N_passport, Name, Experience)
+        const error= await newAdmin.insert(sql)
+        if(error){
+            return res.status(400).json({message: "Something went wrong"})
+        }
+        return res.status(200).json({message:'success'})
+    }
+    catch (e){
+        console.log(e)
+        return res.status(400).json({message: "Something went wrong"})
+    }
+
+}}
 module.exports=new ListController()

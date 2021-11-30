@@ -5,11 +5,11 @@ module.exports = function (req, res, next) {
         if(!res.locals.partials) res.locals.partials = {}
         if(req.signedCookies.length==0){next()}
         const token= req.signedCookies['id']
-        console.log(token)
+        console.log('token: ',token)
         //const token = req.headers.authorization.split(' ')[1]
         if (!token || token==undefined) {
             res.locals.partials.loginboxContext=false
-            console.log('>')
+           // console.log('>')
             return  next()
         }
         const decodedData = jwt.verify(token, secret)

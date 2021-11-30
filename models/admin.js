@@ -8,14 +8,18 @@ module.exports=class Admin{
         this.id=ID
         this.phones=[]
     }
-   async insert(sql){
+   async insert(sql){try {
+
+
         let request = new sql.Request();
        request.input('N_passport', sql.Int, this.n_passport)
        request.input('Name', sql.VarChar(100), this.name)
        request.input('Experience', sql.Int, this.experience)
-       request.query('insert into Admin(N_passport,Name,Experience) values(@N_passport,@Name,@Experience)',(err)=>{
-         //  console.log(err)
-       })
+       await request.query('insert into Admin(N_passport,Name,Experience) values(@N_passport,@Name,@Experience)')}
+   catch (e){
+return e
+   }
+   return
     }
     static async getAll(sql){
         let request = new sql.Request();
@@ -34,22 +38,34 @@ module.exports=class Admin{
 
     }
     async update(sql){
-        await  this.getID(sql)
-        let request=new sql.Request()
-        request.input('ID', sql.Int, this.id)
-        request.input('N_passport', sql.Int, this.n_passport)
-        request.input('Name', sql.VarChar(100), this.name)
-        request.input('Experience', sql.Int, this.experience)
-        request.query('update Admin SET N_passport=@N_passport,Name=@Name,Experience=@Experience WHERE ID=@ID',(err)=> {
-            //  console.log(err)})
-        })
+        try {
+
+
+           // await this.getID(sql)
+            let request = new sql.Request()
+            request.input('ID', sql.Int, this.id)
+            request.input('N_passport', sql.Int, this.n_passport)
+            request.input('Name', sql.VarChar(100), this.name)
+            request.input('Experience', sql.Int, this.experience)
+            await request.query('update Admin SET N_passport=@N_passport,Name=@Name,Experience=@Experience WHERE ID=@ID')
+            return
+        }catch (e) {
+            console.log(e)
+            return e
+        }
     }
     async delete(sql){
+try {
 
-        await  this.getID(sql)
+
+    //    await  this.getID(sql)
         let request=new sql.Request()
         request.input('ID', sql.Int, this.id)
-        request.query('delete from Admin where ID=@ID')
+       await request.query('delete from Admin where ID=@ID')
+    return
+}catch (e) {
+    return e
+}
     }
     async getPhones(sql){
         await  this.getID(sql)
