@@ -10,6 +10,7 @@ const usersRouter = require('./routes/users')
 const dbConnectMiddleWare = require('./bin/middleware/dbConnect')
 const app = express();
 const authMiddleware=require('./bin/middleware/authMiddleware')
+const listRouter=require('./routes/list')
 const hbs = expressHandlebars.create({
     defaultLayout: 'main',
     helpers: {
@@ -39,7 +40,9 @@ app.use(dbConnectMiddleWare)
 
 //Конец настройки
 app.use('/users', usersRouter);
+app.use('/list',listRouter)
 app.use('/', indexRouter);
+
 
 
 // catch 404 and forward to error handler
