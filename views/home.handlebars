@@ -31,7 +31,8 @@
 </div>
 
 {{#section 'topnav-right'}}
-    {{#unless auth}}
+    {{> loginbox}}
+    {{#if false}}
         <p>
         <form name="login" id="LoginForm" method="post" >Логин:
             <input name="login" type="text" size="20">
@@ -39,7 +40,7 @@
             <input type="submit" style="position: absolute; left: -9999px"/>
         </form>
         </p>
-    {{/unless}}
+    {{/if}}
     <a id="photoBox" href="#photos">фотографии</a>
     <a id="contactsBox" href="#contacts">контакты</a>
 

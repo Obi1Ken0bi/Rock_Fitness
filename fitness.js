@@ -20,10 +20,10 @@ const hbs = expressHandlebars.create({
             this._sections[name] = options.fn(this);
             return null;
         }
-    }
+    },
+
 })
 // view engine setup
-
 app.engine('handlebars', hbs.engine)
 app.set('view engine', 'handlebars')
 
