@@ -1,5 +1,6 @@
 const createError = require('http-errors')
 const express = require('express')
+const session = require('express-session')
 const path = require('path')
 const {secret}=require('./config')
 const cookieParser = require('cookie-parser')
@@ -34,10 +35,20 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser(secret));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(authMiddleware)
+
 app.use(dbConnectMiddleWare)
-
-
+app.use(session({
+    secret:secret,
+    resave: false,
+    saveUninitialized: false,
+    cookie:{signed:true}
+}))
+app.use((req,res,next)=>{
+    req.session.role='GUEST'
+    console.log(req.session.role)
+    return next();
+})
+app.use(authMiddleware)
 //Конец настройки
 app.use('/users', usersRouter);
 app.use('/list',listRouter)

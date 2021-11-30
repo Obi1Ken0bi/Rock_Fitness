@@ -2,8 +2,12 @@
 <h2>Админы: </h2>
 {{#each recordsAdmins}}
     <tr>
-        <td> Имя: {{this.Name}}</td>
-        <td>  Стаж: {{this.Experience}} </td>
+        <td> Имя: {{this.name}}</td>
+        <td>  Стаж: {{this.experience}} </td>
+        <td>Телефоны: {{#each this.phones}}
+            {{this.Phone}}
+
+        {{/each}}</td>
         <td>
             <a href="/list/Admin/edit/{{this.ID}}">Edit</a>|
             <form action="/list/Admin/delete/{{this.ID}}" method="POST" style="display:inline;">

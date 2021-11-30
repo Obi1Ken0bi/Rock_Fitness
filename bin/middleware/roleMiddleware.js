@@ -21,7 +21,7 @@ module.exports = function (role) {
             if (!hasRole) {
                 return res.status(403).json({message: 'У вас нет доступа'})
             }
-            next()
+           return next()
         } catch (e) {
             return res.status(403).json({message: 'Пользователь не авторизован'})
         }
