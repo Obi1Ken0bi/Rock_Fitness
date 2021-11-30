@@ -10,10 +10,10 @@ module.exports=class Admin{
     }
    async insert(sql){try {
 
-
+console.log(this.name)
         let request = new sql.Request();
        request.input('N_passport', sql.Int, this.n_passport)
-       request.input('Name', sql.VarChar(100), this.name)
+       request.input('Name', sql.NVarChar(100), this.name)
        request.input('Experience', sql.Int, this.experience)
        await request.query('insert into Admin(N_passport,Name,Experience) values(@N_passport,@Name,@Experience)')}
    catch (e){
@@ -45,7 +45,7 @@ return e
             let request = new sql.Request()
             request.input('ID', sql.Int, this.id)
             request.input('N_passport', sql.Int, this.n_passport)
-            request.input('Name', sql.VarChar(100), this.name)
+            request.input('Name', sql.NVarChar(100), this.name)
             request.input('Experience', sql.Int, this.experience)
             await request.query('update Admin SET N_passport=@N_passport,Name=@Name,Experience=@Experience WHERE ID=@ID')
             return

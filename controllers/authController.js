@@ -20,7 +20,7 @@ class authController {
             const sql = req.sql
             const {username, password} = req.body
             let request = new sql.Request();
-            request.input('usernameinput', sql.VarChar(20), username)
+            request.input('usernameinput', sql.NVarChar(20), username)
 
             const candidate = await request.query('select login from [User] where login like @usernameinput')
             console.log(candidate)
@@ -28,10 +28,10 @@ class authController {
                 return res.status(400).json({message: "Пользователь уже существует"})
             }
             const hashPassword = bcrypt.hashSync(password, 7)
-            request.input('passwordinput', sql.VarChar(100), hashPassword)
+            request.input('passwordinput', sql.NVarChar(100), hashPassword)
             console.log(hashPassword)
             const userDefault = 'USER'
-            request.input('userrole', sql.VarChar(20), userDefault)
+            request.input('userrole', sql.NVarChar(20), userDefault)
             await request.query('insert into [User] values (@usernameinput,@passwordinput,@userrole)')
             return res.json({message: 'Пользователь успешно зарегистрирован'})
 
@@ -47,7 +47,7 @@ class authController {
             const sql = req.sql
             let request = new sql.Request();
             const {login, password} = req.body
-            request.input('usernameinput', sql.VarChar(20), login)
+            request.input('usernameinput', sql.NVarChar(20), login)
             const queryResult = await request.query('select login,password,role from [User] where login like @usernameinput')
             console.log(queryResult)
             if(!queryResult.recordset[0]){

@@ -82,8 +82,10 @@ async PostAdminCreate(req,res,next)
 
 
         const sql = req.sql
+
         const {N_passport, Name, Experience} = req.body
         const newAdmin = new admin(N_passport, Name, Experience)
+        console.log(newAdmin)
         const error= await newAdmin.insert(sql)
         if(error){
             return res.status(400).json({message: "Something went wrong"})
