@@ -9,6 +9,7 @@ module.exports = function (req, res, next) {
         //const token = req.headers.authorization.split(' ')[1]
         if (!token || token==undefined) {
             res.locals.partials.loginboxContext=false
+            req.session.loggedIn=false
            // console.log('>')
             return  next()
         }
@@ -17,6 +18,7 @@ module.exports = function (req, res, next) {
 
         req.user = decodedData
         req.session.role=decodedData.role
+        if(req.session.role=="ADMIN") res.locals.partials.admin=true
         req.session.loggedIn=true
         res.locals.partials.role=req.session.role
         console.log(req.session.role)

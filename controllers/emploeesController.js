@@ -7,7 +7,15 @@ class ListController{
     const listCoaches=await request.query('select * from Coach')
     const recordsAdmins=listAdmins
     const recordsCoaches=listCoaches.recordset
-    res.render('employees',{recordsAdmins:recordsAdmins,recordsCoaches:recordsCoaches})
+        let _admin
+        const trueAdminList=[]
+        await recordsAdmins.forEach(rofl=>{
+            _admin=new admin(rofl.N_passport,rofl.Name,rofl.Experience,rofl.ID)
+            _admin.getPhones(sql)
+            //console.log(_admin)
+            trueAdminList.push(_admin)
+        })
+    res.render('employees',{recordsAdmins:trueAdminList,recordsCoaches:recordsCoaches})
 }
 async Admin(req,res,next){
     const sql=req.sql
@@ -38,8 +46,8 @@ async PostAdminDelete(req,res,next){
         try {
 
             const sql=req.sql
-            const {ID}=req.body
-            const id=req.query
+         //   const {ID}=req.body
+            const ID=req.params.id
             const newAdmin=new admin(undefined,undefined,undefined,ID)
           const error= await newAdmin.delete(sql)
             if(error){
@@ -80,8 +88,9 @@ async PostAdminCreate(req,res,next)
         if(error){
             return res.status(400).json({message: "Something went wrong"})
         }
-        return res.status(200).json({message:'success'})
+        return res.redirect('/list/employees')
     }
+
     catch (e){
         console.log(e)
         return res.status(400).json({message: "Something went wrong"})
