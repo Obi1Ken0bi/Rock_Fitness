@@ -5,7 +5,7 @@ const {check} = require('express-validator')
 const roleMiddleware = require('../bin/middleware/roleMiddleware')
 
 router.get('/', function (req, res, next) {
-    console.log('???')
+   // console.log('???')
     res.render('home',{auth: req.authrized});
 });
 router.get('/registration', function (req, res) {

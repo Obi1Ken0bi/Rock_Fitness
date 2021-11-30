@@ -18,6 +18,7 @@ async Admin(req,res,next){
    await adminList.forEach(rofl=>{
         _admin=new admin(rofl.N_passport,rofl.Name,rofl.Experience)
         _admin.getPhones(sql)
+       //console.log(_admin)
         trueAdminList.push(_admin)
     })
    // console.log(trueAdminList)

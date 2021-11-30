@@ -69,7 +69,7 @@ try {
     }
     async getPhones(sql){
         await  this.getID(sql)
-       // console.log(this)
+      //  console.log(this)
         let request=new sql.Request()
         request.input('ID', sql.Int, this.id)
        const result=await request.query('select Phone from Phone_Admin where ID=@ID')
