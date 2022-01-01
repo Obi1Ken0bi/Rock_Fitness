@@ -23,13 +23,13 @@ class authController {
             request.input('usernameinput', sql.NVarChar(20), username)
 
             const candidate = await request.query('select login from [User] where login like @usernameinput')
-            console.log(candidate)
+            //console.log(candidate)
             if (candidate.rowsAffected[0] > 0) {
                 return res.status(400).json({message: "Пользователь уже существует"})
             }
             const hashPassword = bcrypt.hashSync(password, 7)
             request.input('passwordinput', sql.NVarChar(100), hashPassword)
-            console.log(hashPassword)
+           // console.log(hashPassword)
             const userDefault = 'USER'
             request.input('userrole', sql.NVarChar(20), userDefault)
             await request.query('insert into [User] values (@usernameinput,@passwordinput,@userrole)')
@@ -43,7 +43,7 @@ class authController {
 
     async login(req, res, next) {
         try {
-            console.log(req.body)
+          //  console.log(req.body)
             const sql = req.sql
             let request = new sql.Request();
             const {login, password} = req.body

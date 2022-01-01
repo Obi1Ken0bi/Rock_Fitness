@@ -1,12 +1,12 @@
 
 
 module.exports=class Admin{
-    constructor(N_passport,Name,Experience,ID=0) {
+    constructor(N_passport,Name,Experience,Phones=[],ID=0) {
         this.n_passport=N_passport
         this.name=Name
         this.experience=Experience
         this.id=ID
-        this.phones=[]
+        this.phones=Phones
     }
    async insert(sql){try {
 
@@ -15,9 +15,23 @@ console.log(this.name)
        request.input('N_passport', sql.Int, this.n_passport)
        request.input('Name', sql.NVarChar(100), this.name)
        request.input('Experience', sql.Int, this.experience)
-       await request.query('insert into Admin(N_passport,Name,Experience) values(@N_passport,@Name,@Experience)')}
+       await request.query('insert into Admin(N_passport,Name,Experience) values(@N_passport,@Name,@Experience)')
+   if(this.phones!=[]){
+      await this.getID(sql)
+
+       console.log(this.phones)
+       for(const ph of this.phones){
+           const request1=new sql.Request()
+           request1.input('Id',sql.Int,this.id)
+           request1.input('Phone',sql.NVarChar(20),ph)
+            console.log('телефон='+ph)
+           await request1.query('insert into Phone_Admin(Phone,ID) values(@Phone,@Id)')
+       }
+   }
+   }
    catch (e){
-return e
+       console.log(e)
+       return e
    }
    return
     }
@@ -28,6 +42,17 @@ return e
         //const result2=result.recordset
 
         return result.recordset
+    }
+    async getInfoByID(sql){
+
+        let request = new sql.Request();
+        request.input('ID',sql.Int,this.id)
+        const result=await request.query('select * from Admin where ID=@ID')
+        const records=result.recordset[0]
+        this.n_passport=records.N_passport
+        this.name=records.Name
+        this.experience=records.Experience
+        await this.getPhones(sql)
     }
     async getID(sql){
         let request = new sql.Request();
@@ -48,6 +73,14 @@ return e
             request.input('Name', sql.NVarChar(100), this.name)
             request.input('Experience', sql.Int, this.experience)
             await request.query('update Admin SET N_passport=@N_passport,Name=@Name,Experience=@Experience WHERE ID=@ID')
+            await request.query('delete from Phone_Admin where ID=@ID')
+            for(const ph of this.phones){
+                const request1=new sql.Request()
+                request1.input('Id',sql.Int,this.id)
+                request1.input('Phone',sql.NVarChar(20),ph)
+                console.log('телефон='+ph)
+                await request1.query('insert into Phone_Admin(Phone,ID) values(@Phone,@Id)')
+            }
             return
         }catch (e) {
             console.log(e)
@@ -73,11 +106,11 @@ try {
         let request=new sql.Request()
         request.input('ID', sql.Int, this.id)
        const result=await request.query('select Phone from Phone_Admin where ID=@ID')
-    //    console.log(result.recordset)
+      //  console.log(result.recordset)
 
             this.phones=result.recordset
-      //  console.log(this)
-        return
+       // console.log(this)
+        return this.phones
 
     }
 }

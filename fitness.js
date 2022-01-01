@@ -45,11 +45,18 @@ app.use(session({
 }))
 app.use((req,res,next)=>{
     req.session.role='GUEST'
-    console.log(req.session.role)
+    //console.log(req.session.role)
     return next();
 })
 app.use(authMiddleware)
 //Конец настройки
+app.use((req, res,next) => {
+    if(req.body.Phones){
+        phones=req.body.Phones
+      req.body.Phones =phones.split(',')
+    }
+    return next()
+})
 app.use('/users', usersRouter);
 app.use('/list',listRouter)
 app.use('/', indexRouter);
