@@ -34,16 +34,26 @@
 {{/if}}
 {{#each recordsCoaches}}
     <tr>
-        <td>  Имя: {{this.Name}} </td>
-        <td>Стаж: {{this.Experience}} </td>
-    {{#if ../partials.admin}}
+        <td> Имя: {{this.name}}</td>
+        <td>  Стаж: {{this.experience}} </td>
+
+        <td>Телефоны: {{#each this.phones}}
+            {{this.Phone}}
+
+        {{/each}}</td>
+
         <td>
-            <a href="/list/Coach/edit/{{this.ID}}">Edit</a>|
-            <form action="/list/Coach/delete/{{this.ID}}" method="POST" style="display:inline;">
-                <input type="submit" value="Delete" />
-            </form>
+
+            {{#if ../partials.admin}}
+                <a href="/list/Admin/edit/{{this.id}}">Edit</a>|
+
+
+                <form action="/list/Admin/delete/{{this.id}}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete" />
+                </form>
+            {{/if}}
         </td>
-    {{/if}}
+
     </tr>
     <br>
 {{/each}}

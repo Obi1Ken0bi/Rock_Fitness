@@ -51,9 +51,10 @@ app.use((req,res,next)=>{
 app.use(authMiddleware)
 //Конец настройки
 app.use((req, res,next) => {
-    if(req.body.Phones){
-        phones=req.body.Phones
-      req.body.Phones =phones.split(',')
+    let phones
+    if (req.body.Phones) {
+        phones = req.body.Phones
+        req.body.Phones = phones.split(',')
     }
     return next()
 })
