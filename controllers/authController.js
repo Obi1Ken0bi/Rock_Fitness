@@ -34,20 +34,28 @@ class authController {
            // console.log(hashPassword)
             const userDefault = 'USER'
             request.input('userrole', sql.NVarChar(20), userDefault)
-            await request.query('insert into [User] values (@usernameinput,@passwordinput,@userrole)')
-            const newClient=new client(n_passport,name,age,Phones,gender)
-            await newClient.insert(sql)
-            await newClient.getID(sql)
-            const id=newClient.id
-            const request1=new sql.Request()
-            request1.input('username',sql.VarChar(20),username1)
-            request1.input('id',sql.Int,id)
-            console.log('id: '+id)
-            const err=await request1.query('insert into User_Client(id,login) values(@id,@username)')
-            if(err){
-                console.log(err)
-                return  next(err)
+
+
+
+                const newClient = new client(n_passport, name, age, Phones, gender)
+               const error= await newClient.insert(sql)
+            if(error){
+                return  next(error)
             }
+            await request.query('insert into [User] values (@usernameinput,@passwordinput,@userrole)')
+                await newClient.getID(sql)
+                const id = newClient.id
+                //  const request1=new sql.Request()
+                request.input('username', sql.VarChar(20), username1)
+                request.input('id', sql.Int, id)
+                console.log('id: ' + id)
+                const err = await request.query('insert into User_Client(id,login) values(@id,@username)')
+                if(err){
+                    console.log(err)
+                    return  next(err)
+                }
+
+
             return res.redirect('/')
 
         } catch (e) {

@@ -61,7 +61,7 @@ async adminProfile(req,res,next){
         res.redirect('/myprofile')
     }
 
-async profileDeletePost(req,res,next){
+async profileDeleteGet(req, res, next){
     const sql = req.sql
     const login = req.session.login
     let request = new sql.Request();
@@ -70,7 +70,7 @@ async profileDeletePost(req,res,next){
     const id = queryResult.recordset[0].id
     const client1 = new client(undefined, undefined, undefined, undefined,undefined ,id)
     await client1.delete(sql)
-    await request.query('delete from User where login=@login')
+    await request.query('delete from [User] where login=@login')
     res.redirect('/logout')
 }
 }

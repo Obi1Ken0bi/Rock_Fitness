@@ -13,6 +13,6 @@ router.get('/',(req, res, next) => {
 })
 router.get('/edit',role('USER'),profileController.profileEditGet)
 router.post('/edit',role('USER'),profileController.profileEditPost)
-router.post('/delete',role('USER'),profileController.profileDeletePost)
+router.get('/delete',role('USER'),profileController.profileDeleteGet)
 
 module.exports=router
