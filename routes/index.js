@@ -5,8 +5,15 @@ const {check} = require('express-validator')
 const roleMiddleware = require('../bin/middleware/roleMiddleware')
 
 router.get('/', function (req, res, next) {
-   // console.log('???')
-    res.render('home',{auth: req.authrized});
+   const sql=req.sql
+    const rofl=new sql.Request()
+     rofl.query('select count(ID) as cont from Client').then((aRolf)=> {
+         console.log(aRolf)
+         const pepega=aRolf.recordset[0].cont
+             res.render('home',{count:pepega});
+         }
+     )
+
 });
 router.get('/registration', function (req, res) {
     res.render('registration')
