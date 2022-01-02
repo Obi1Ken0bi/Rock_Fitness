@@ -1,12 +1,13 @@
 
 
 module.exports=class Client{
-    constructor(N_passport,Name,Age,Phones=[],ID=0) {
+    constructor(N_passport,Name,Age,Phones=[],Gender,ID=0) {
         this.n_passport=N_passport
         this.name=Name
         this.age=Age
         this.id=ID
         this.phones=Phones
+        this.gender=Gender
     }
     async insert(sql){try {
 
@@ -15,7 +16,8 @@ module.exports=class Client{
         request.input('N_passport', sql.Int, this.n_passport)
         request.input('Name', sql.NVarChar(100), this.name)
         request.input('Age', sql.Int, this.age)
-        await request.query('insert into Client(N_passport,Name,Experience) values(@N_passport,@Name,@Age)')
+        request.input('Gender',sql.VarChar(10),this.gender)
+        await request.query('insert into Client(N_passport,Name,Age,Gender) values(@N_passport,@Name,@Age,@Gender)')
         if(this.phones!==[]){
             await this.getID(sql)
 
@@ -61,6 +63,7 @@ module.exports=class Client{
         this.n_passport=records.N_passport
         this.name=records.Name
         this.age=records.Age
+        this.gender=records.Gender
         await this.getPhones(sql)
     }
     async getID(sql){
@@ -81,7 +84,8 @@ module.exports=class Client{
             request.input('N_passport', sql.Int, this.n_passport)
             request.input('Name', sql.NVarChar(100), this.name)
             request.input('Age', sql.Int, this.age)
-            await request.query('update Client SET N_passport=@N_passport,Name=@Name,Age=@Age WHERE ID=@ID')
+            request.input('Gender',sql.VarChar(10),this.gender)
+            await request.query('update Client SET N_passport=@N_passport,Name=@Name,Age=@Age,Gender=@Gender WHERE ID=@ID')
             await request.query('delete from Phone_Client where ID=@ID')
             for(const ph of this.phones){
                 const request1=new sql.Request()

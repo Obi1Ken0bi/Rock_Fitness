@@ -19,7 +19,10 @@
 <div id="topnav" class="topnav">
     <a class="active" href="/">главная</a>
     <a href="/list/employees">сотрудники</a>
-    <a href="workstations">тренажеры</a>
+
+{{#if partials.user}}
+    <a href="/contract">абонементы</a>
+{{/if}}
 {{#unless partials.loginboxContext}}
     <a href="registration">регистрация</a>
     {{/unless}}
@@ -78,6 +81,7 @@
         }).then(json=>{
 
             container.innerHTML='<b>Вы вошли</b>'
+            window.location.href = "/";
         }).catch(err => {
             container.innerHTML = `<b>We're sorry, we had a problem `
         })

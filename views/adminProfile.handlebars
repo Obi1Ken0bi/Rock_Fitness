@@ -9,5 +9,10 @@
     {{this.Phone}}
 
 {{/each}}</td>
-
+<form action="/list/Admin/delete/{{admin.id}}" method="POST">
+    <input type="submit" value="Удалить профиль" />
+</form>
+<form action="/list/Admin/edit/{{admin.id}}" method="get">
+    <input type="submit" value="Изменить профиль" />
+</form>
 <td>

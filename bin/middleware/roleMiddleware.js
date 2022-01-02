@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const {secret} = require("./../../config");
-module.exports = function (role) {
+module.exports = function (role1,role2=undefined) {
     return function (req, res, next) {
         //if (req.method === 'OPTIONS') {
            // next()
@@ -18,10 +18,11 @@ module.exports = function (role) {
             let userRole = decodedData.role
             console.log(userRole)
             let hasRole = false
-            if (userRole === role) {
-                hasRole = true
-            }
-            console
+
+                if (userRole === role1 || userRole===role2) {
+                    hasRole = true
+                }
+
             if (!hasRole) {
                 return res.status(403).json({message: 'У вас нет доступа'})
             }

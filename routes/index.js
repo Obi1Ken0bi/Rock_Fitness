@@ -11,8 +11,8 @@ router.get('/', function (req, res, next) {
 router.get('/registration', function (req, res) {
     res.render('registration')
 })
-router.post('/registration', [check('username', 'Имя пользователя не может быть пустым').notEmpty(),
-    (check('password', 'Пароль от 4 до 10 символов').isLength({max: 10, min: 4}))
+router.post('/registration', [check('username1', 'Имя пользователя не может быть пустым').notEmpty(),
+    (check('password1', 'Пароль от 4 до 10 символов').isLength({max: 10, min: 4}))
 ], controller.registration)
 router.post('/api/login', controller.login)
 router.get('/users', roleMiddleware('ADMIN'), controller.getUsers)

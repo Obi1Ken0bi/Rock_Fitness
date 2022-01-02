@@ -1,0 +1,16 @@
+<h1> Ваш профиль </h1>
+Ваш логин: {{login}}
+<br>
+Ваше имя: {{client.name}}
+<br>
+<td>  Возраст: {{client.age}} </td>
+<td>Пол: {{client.gender}}</td>
+<td>Телефоны: {{#each client.phones}}
+    {{this.Phone}}
+
+{{/each}}</td>
+<form action="/myprofile/delete" method="POST">
+    <input type="submit" value="Удалить профиль" />
+</form>
+<a href="/myprofile/edit">Изменить профиль</a>|
+<td>
