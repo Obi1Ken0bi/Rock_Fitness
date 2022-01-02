@@ -43,6 +43,15 @@ console.log(this.name)
 
         return result.recordset
     }
+     async getAllExcept(sql){
+        let request = new sql.Request();
+        request.input('id',sql.Int,this.id)
+        const result=await request.query('select * from Admin where ID!=@id')
+
+        //const result2=result.recordset
+
+        return result.recordset
+    }
     async getInfoByID(sql){
 
         let request = new sql.Request();

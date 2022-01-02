@@ -8,6 +8,7 @@ const logger = require('morgan')
 const expressHandlebars = require('express-handlebars')
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
+const profileRouter=require('./routes/profile')
 const dbConnectMiddleWare = require('./bin/middleware/dbConnect')
 const app = express();
 const authMiddleware=require('./bin/middleware/authMiddleware')
@@ -59,6 +60,7 @@ app.use((req, res,next) => {
     return next()
 })
 app.use('/users', usersRouter);
+app.use('/myprofile',profileRouter)
 app.use('/list',listRouter)
 app.use('/', indexRouter);
 

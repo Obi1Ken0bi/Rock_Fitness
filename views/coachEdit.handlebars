@@ -1,0 +1,26 @@
+<p>
+<form name="coachCreate" id="CoachCreate" method="post" action="/list/Coach/Edit">
+    <label> Номер паспорта:
+        <input name="N_passport" type="text" size="20" value="{{{coach1.n_passport}}}">
+    </label>
+    <label>Имя
+        <input name="Name" type="text" size="20" value="{{{coach1.name}}}">
+    </label>
+    <label>Стаж
+        <input name="Experience" type="number" size="20" value={{{coach1.experience}}}>
+    </label>
+    <label>Номера
+        <input name="Phones" type="text" size="20" value={{{phones}}}>
+    </label>
+    Был нанят <select name="ID_admin">
+        <option>{{{coach1.id_adm}}}</option>
+    {{#each admins}}
+        <option value={{{this.ID}}}>{{{this.ID}}}</option>
+    {{/each}}
+    </select>
+    <input name="ID" type="hidden" value="{{{coach1.id}}}">
+    <input type="submit" />
+</form>
+</p>
+
+

@@ -18,6 +18,7 @@ router.post('/api/login', controller.login)
 router.get('/users', roleMiddleware('ADMIN'), controller.getUsers)
 router.get('/logout',(req, res) => {
     res.clearCookie('id')
+    req.session.destroy()
     return  res.redirect('/')
 })
 module.exports = router

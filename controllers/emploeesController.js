@@ -30,6 +30,7 @@ class ListController{
 }
 
 async GetAdminCreate(req,res,next){
+
         res.render('adminCreate')
 }
 async PostAdminDelete(req,res,next){
@@ -105,8 +106,12 @@ async PostAdminCreate(req,res,next)
        return res.render('adminEdit',{admin1:admin1,phones:phonesToOutput})
     }
     //Тренеры
-    async GetCoachCreate(req,res,next){
-        res.render('coachCreate')
+    async   GetCoachCreate(req,res,next){
+
+        const sql=req.sql
+        const allAdmins=await admin.getAll(sql)
+
+        res.render('coachCreate',{admins:allAdmins})
     }
     async PostCoachDelete(req,res,next){
         try {
@@ -151,7 +156,7 @@ async PostAdminCreate(req,res,next)
             const sql = req.sql
 
             const {N_passport, Name, Experience, Phones,ID_admin} = req.body
-            const newCoach = new admin(N_passport, Name, Experience,Phones,0,ID_admin)
+            const newCoach = new coach(N_passport, Name, Experience,Phones,0,ID_admin)
             console.log(newCoach)
             const error= await newCoach.insert(sql)
             if(error){
@@ -178,7 +183,9 @@ async PostAdminCreate(req,res,next)
         }
         phonesToOutput=phonesToOutput.slice(0,-1)
         console.log(phonesToOutput)
-        const allAdmins=admin.getAll()
+        const admin1=new admin(undefined,undefined,undefined,undefined,coach1.id_adm)
+        const allAdmins=await admin1.getAllExcept(sql)
+        console.log(allAdmins)
         return res.render('coachEdit',{coach1:coach1,phones:phonesToOutput,admins:allAdmins})
     }
 }

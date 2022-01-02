@@ -1,0 +1,13 @@
+<h1> Ваш профиль </h1>
+Ваш логин:{{login}}
+<br>
+Ваше имя:{{admin.name}}
+<br>
+<td>  Стаж: {{admin.experience}} </td>
+
+<td>Телефоны: {{#each admin.phones}}
+    {{this.Phone}}
+
+{{/each}}</td>
+
+<td>

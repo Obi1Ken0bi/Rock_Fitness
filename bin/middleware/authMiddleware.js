@@ -15,9 +15,11 @@ module.exports = function (req, res, next) {
         }
         const decodedData = jwt.verify(token, secret)
         res.locals.partials.loginboxContext=true
+        console.log(decodedData)
 
         req.user = decodedData
         req.session.role=decodedData.role
+        req.session.login=decodedData.login
         if(req.session.role=="ADMIN") res.locals.partials.admin=true
         req.session.loggedIn=true
         res.locals.partials.role=req.session.role
