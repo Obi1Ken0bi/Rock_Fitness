@@ -11,7 +11,7 @@ module.exports=class Client{
     }
     async insert(sql){try {
 
-        console.log(this.name)
+     //   console.log(this.name)
         let request = new sql.Request();
         request.input('N_passport', sql.Int, this.n_passport)
         request.input('Name', sql.NVarChar(100), this.name)
@@ -21,12 +21,12 @@ module.exports=class Client{
         if(this.phones!==[]){
             await this.getID(sql)
 
-            console.log(this.phones)
+         //   console.log(this.phones)
             for(const ph of this.phones){
                 const request1=new sql.Request()
                 request1.input('Id',sql.Int,this.id)
                 request1.input('Phone',sql.NVarChar(20),ph)
-                console.log('телефон='+ph)
+            //    console.log('телефон='+ph)
                 await request1.query('insert into Phone_Client(Phone,ID) values(@Phone,@Id)')
             }
         }
@@ -92,7 +92,7 @@ module.exports=class Client{
                 const request1=new sql.Request()
                 request1.input('Id',sql.Int,this.id)
                 request1.input('Phone',sql.NVarChar(20),ph)
-                console.log('телефон='+ph)
+           //     console.log('телефон='+ph)
                 await request1.query('insert into Phone_Client(Phone,ID) values(@Phone,@Id)')
             }
             return

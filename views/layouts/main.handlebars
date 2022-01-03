@@ -23,8 +23,11 @@
 {{#if partials.user}}
     <a href="/contract">абонементы</a>
 {{/if}}
+{{#if partials.admin}}
+    <a href="/adminpanel">панель администратора</a>
+{{/if}}
 {{#unless partials.loginboxContext}}
-    <a href="registration">регистрация</a>
+    <a href="/registration">регистрация</a>
     {{/unless}}
 
     <div class="topnav-right">

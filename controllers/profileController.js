@@ -56,7 +56,7 @@ async adminProfile(req,res,next){
     const  {n_passport,name,age,gender,Phones}=req.body
         const editedClient=new client(n_passport,name,age,Phones,gender)
         await editedClient.getID(sql)
-        console.log(editedClient)
+    //    console.log(editedClient)
         await editedClient.update(sql)
         res.redirect('/myprofile')
     }

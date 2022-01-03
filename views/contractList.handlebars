@@ -1,0 +1,17 @@
+<h1>Список абонементов:</h1>
+<a href="/adminpanel/contracts/create"> Добавить контракт</a>
+{{#each contracts}}
+    <h2>Контракт {{this.ID}}</h2>
+    Дата начала:{{this.Date_Start}} <br>
+    Дата окончания:{{this.Date_End}} <br>
+    Количество посещений:{{this.EnterNumber}} <br>
+    Цена:{{this.Price}} <br>
+    Клиент:{{this.ID_Client}}  <br>
+    Администратор:{{this.ID_Admin}}
+    <br>
+    <a href="/adminpanel/contracts/edit/{{this.ID}}">Edit</a>|
+    <form action="/adminpanel/contracts/delete/{{this.ID}}" method="POST" style="display:inline;">
+        <input type="submit" value="Delete" />
+    </form>
+    <br>
+{{/each}}

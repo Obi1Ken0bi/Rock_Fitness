@@ -48,7 +48,7 @@ class authController {
                 //  const request1=new sql.Request()
                 request.input('username', sql.VarChar(20), username1)
                 request.input('id', sql.Int, id)
-                console.log('id: ' + id)
+          //      console.log('id: ' + id)
                 const err = await request.query('insert into User_Client(id,login) values(@id,@username)')
                 if(err){
                     console.log(err)
@@ -72,7 +72,7 @@ class authController {
             const {login, password} = req.body
             request.input('usernameinput', sql.NVarChar(20), login)
             const queryResult = await request.query('select login,password,role from [User] where login like @usernameinput')
-            console.log(queryResult)
+      //      console.log(queryResult)
             if(!queryResult.recordset[0]){
                 return res.status(400).json({message: "Пользователь " + login + " не найден"})
             }
@@ -87,7 +87,7 @@ class authController {
             if (!validPassword) {
                 return res.status(400).json({message: "Введен неверный пароль"})
             }
-            console.log(roleFromQuery)
+         //   console.log(roleFromQuery)
             const token = generateAccesToken(loginFromQuery, roleFromQuery)
             return   res.cookie('id',token,{signed:true}).json({token})
             //res.json({token})

@@ -1,5 +1,7 @@
 const createError = require('http-errors')
 const express = require('express')
+const checkRole=require('./bin/middleware/roleMiddleware')
+const panelRouter=require('./routes/adminPanel')
 const session = require('express-session')
 const path = require('path')
 const {secret}=require('./config')
@@ -62,6 +64,7 @@ app.use((req, res,next) => {
 app.use('/contract', contractRouter);
 app.use('/myprofile',profileRouter)
 app.use('/list',listRouter)
+app.use('/adminpanel',checkRole('ADMIN'),panelRouter)
 app.use('/', indexRouter);
 
 

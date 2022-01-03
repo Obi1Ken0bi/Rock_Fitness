@@ -1,0 +1,28 @@
+<p><a href="/adminpanel/clients/create">Добавить Клиента</a></p>
+<h2>Клиенты: </h2>
+{{#each clients}}
+    <tr>
+        <td> Имя: {{this.name}}</td>
+        <td>  Возраст: {{this.age}} </td>
+        <td>Пол {{this.gender}}</td>
+
+        <td>Телефоны: {{#each this.phones}}
+            {{this.Phone}}
+
+        {{/each}}</td>
+
+        <td>
+
+
+                <a href="/adminpanel/clients/edit/{{this.id}}">Edit</a>|
+
+
+                <form action="/adminpanel/clients/delete/{{this.id}}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete" />
+                </form>
+
+        </td>
+
+    </tr>
+    <br>
+{{/each}}

@@ -9,7 +9,7 @@ class contractController{
         const nextYear=(parseInt(year)+1).toString()
 
         const admins=await admin.getAll(req.sql)
-        console.log(admins)
+      //  console.log(admins)
         res.render('contractBuy',{year:year,month:month,day:day,nextYear:nextYear,admins:admins})
 
     }
@@ -21,20 +21,20 @@ class contractController{
         request.input('login', sql.NVarChar(20), login)
         const queryResult = await request.query('select id from User_Client where login=@login')
         const id = queryResult.recordset[0].id
-        console.log(dateStart)
-        console.log(dateEnd)
+       // console.log(dateStart)
+      //  console.log(dateEnd)
         const dateStart1=new Date()
         const dateEnd1=new Date()
         dateStart1.setFullYear(parseInt(dateStart.slice(0,4)))
-        dateStart1.setMonth(parseInt(dateStart.slice(5,7)))
+        dateStart1.setMonth(parseInt(dateStart.slice(5,7))-1)
         dateStart1.setDate(parseInt(dateStart.slice(8,10)))
         dateEnd1.setFullYear(parseInt(dateEnd.slice(0,4)))
-        dateEnd1.setMonth(parseInt(dateEnd.slice(5,7)))
+        dateEnd1.setMonth(parseInt(dateEnd.slice(5,7))-1)
         dateEnd1.setDate(parseInt(dateEnd.slice(8,10)))
         if(idAdm=='not')
             idAdm=undefined
         const cont=new contract(dateStart1,dateEnd1,enterNumber,price,id,idAdm)
-        console.log(cont)
+       // console.log(cont)
         const err=await cont.insert(sql)
         if(err)
             next(err)
@@ -65,7 +65,7 @@ class contractController{
       else {
           name=' '
       }
-      console.log(cont)
+     // console.log(cont)
       res.render('contractView',{contract:cont,yearStart:yearStart,monthStart:monthStart,dayStart:dayStart,yearEnd:yearEnd,monthEnd:monthEnd,dayEnd:dayEnd,name:name})
   }
   async updateEntersPost(req,res,next){
@@ -73,7 +73,7 @@ class contractController{
         const {price,enterNumber,id}=req.body
       const cont=new contract(null,null,null,null,null,null,id)
      await cont.getInfoByID(sql)
-      console.log(cont)
+    //  console.log(cont)
     cont.price+=parseInt(price)
       cont.enterNumber+=parseInt(enterNumber)
       await cont.addEnters(sql)

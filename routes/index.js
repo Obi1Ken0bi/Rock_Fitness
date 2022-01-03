@@ -8,7 +8,7 @@ router.get('/', function (req, res, next) {
    const sql=req.sql
     const rofl=new sql.Request()
      rofl.query('select count(ID) as cont from Client').then((aRolf)=> {
-         console.log(aRolf)
+      //   console.log(aRolf)
          const pepega=aRolf.recordset[0].cont
              res.render('home',{count:pepega});
          }

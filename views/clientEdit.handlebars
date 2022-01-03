@@ -1,0 +1,25 @@
+<h1>Изменить данные</h1>
+<p>
+<form name="reg" id="reg" method="post" action="/adminpanel/clients/edit">
+    <br>
+    <label> Номер паспорта:
+        <input name="n_passport" type="text" size="20" value={{client.n_passport}}>
+    </label>
+    <label> Имя:
+        <input name="name" type="text" size="40" value="{{client.name}}">
+    </label>
+    <label> Возраст:
+        <input name="age" type="number" size="3" value={{client.age}}>
+    </label>
+    <label> Пол:
+        <select name="gender">
+            <option value="M">M</option>
+            <option value="F">F</option>
+        </select>
+    </label>
+    <label>Номера
+        <input name="Phones" type="text" size="30" value={{phones}}>
+    </label>
+    <input type="submit" />
+</form>
+</p>

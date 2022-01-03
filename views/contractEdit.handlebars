@@ -1,0 +1,46 @@
+<h1>Абонемент</h1>
+<form  name="viewContract" method="post" action="/adminpanel/contracts/ed">
+    <label>Введите имя клиента
+        <select name="idCl">
+            <option value="{{client.id}}">{{client.name}} </option>
+            {{#each otherClients}}
+                <option value={{this.ID}}>{{this.Name}}</option>
+            {{/each}}
+        </select>
+    </label>
+    <label>Дата начала
+        <input name="dateStart"  type="date" value="{{{yearStart}}}-{{{monthStart}}}-{{{dayStart}}}" >
+    </label>
+    <label>Дата конца
+        <input  type="date" name="dateEnd" value="{{{yearEnd}}}-{{{monthEnd}}}-{{{dayEnd}}}" >
+    </label>
+    <label>Количество посещений
+        <input id="n" name="enterNumber"  type="number" value={{contract.enterNumber}} >
+    </label>
+    <label>Цена
+        <input id="pr" name="price" type="number" value={{contract.price}}>
+    </label>
+    <br>
+    <label>Введите имя администратора(Не обязательно)
+        <select name="idAdm">
+            <option value="{{admin.id}}">{{admin.name}} </option>
+            {{#each otherAdmins}}
+                <option value={{this.ID}}>{{this.Name}}</option>
+            {{/each}}
+        </select>
+    </label>
+    <input name="id" type="hidden" value={{contract.id}}>
+    <input type="submit" value="Изменить">
+</form>
+
+{{#section 'scripts'}}
+    <script>
+        const numberElem=document.getElementById('n')
+        const pricingElem=document.getElementById('pr')
+
+        numberElem.addEventListener('change',()=>{
+            pricingElem.value=numberElem.value*100
+        })
+
+    </script>
+{{/section}}

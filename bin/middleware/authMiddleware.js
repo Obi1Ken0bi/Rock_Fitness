@@ -20,12 +20,14 @@ module.exports = function (req, res, next) {
         req.user = decodedData
         req.session.role=decodedData.role
         req.session.login=decodedData.login
-        if(req.session.role=="ADMIN") {res.locals.partials.admin=true
-        res.locals.partials.user=true}
+        if(req.session.role=="ADMIN") {
+            res.locals.partials.admin = true
+            // res.locals.partials.user=true}
+        }
         if(req.session.role=="USER") res.locals.partials.user=true
         req.session.loggedIn=true
         res.locals.partials.role=req.session.role
-        console.log(req.session.role)
+    //    console.log(req.session.role)
        return  next()
     } catch (e) {
         res.locals.partials.loginboxContext=false

@@ -24,7 +24,7 @@ module.exports=class Coach{
                 const request1=new sql.Request()
                 request1.input('Id',sql.Int,this.id)
                 request1.input('Phone',sql.NVarChar(20),ph)
-                console.log('телефон='+ph)
+             //   console.log('телефон='+ph)
                 await request1.query('insert into Phone_Coach(Phone,ID) values(@Phone,@Id)')
             }
         }
@@ -80,7 +80,7 @@ module.exports=class Coach{
                 const request1=new sql.Request()
                 request1.input('Id',sql.Int,this.id)
                 request1.input('Phone',sql.NVarChar(20),ph)
-                console.log('телефон='+ph)
+         //       console.log('телефон='+ph)
                 await request1.query('insert into Phone_Coach(Phone,ID) values(@Phone,@Id)')
             }
             return

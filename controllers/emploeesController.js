@@ -40,7 +40,7 @@ async PostAdminDelete(req,res,next){
          //   const {ID}=req.body
             const ID=req.params.id
             const newAdmin=new admin(undefined,undefined,undefined,undefined,ID)
-            console.log(newAdmin)
+      //      console.log(newAdmin)
           const error= await newAdmin.delete(sql)
             if(error){
                 return res.status(400).json({message: "Something went wrong"})
@@ -58,7 +58,7 @@ async PostAdminEdit(req,res,next){
             const sql = req.sql
             const {ID,N_passport, Name, Experience,Phones} = req.body
             const newAdmin = new admin(N_passport, Name, Experience,Phones,ID)
-            console.log(newAdmin.id)
+       //     console.log(newAdmin.id)
             const error=    await newAdmin.update(sql)
             if(error){
                 return res.status(400).json({message: "Something went wrong"})
@@ -77,7 +77,7 @@ async PostAdminCreate(req,res,next)
 
         const {N_passport, Name, Experience, Phones} = req.body
         const newAdmin = new admin(N_passport, Name, Experience,Phones)
-        console.log(newAdmin)
+     //   console.log(newAdmin)
         const error= await newAdmin.insert(sql)
         if(error){
             return res.status(400).json({message: "Something went wrong"})
@@ -96,13 +96,13 @@ async PostAdminCreate(req,res,next)
         const ID=req.params.id
         const admin1=new admin(undefined,undefined,undefined,undefined,ID)
         await admin1.getInfoByID(sql)
-       console.log(admin1)
+     //  console.log(admin1)
        let phonesToOutput=''
        for(const Phone of admin1.phones){
            phonesToOutput+=Phone.Phone+','
        }
        phonesToOutput=phonesToOutput.slice(0,-1)
-       console.log(phonesToOutput)
+     //  console.log(phonesToOutput)
        return res.render('adminEdit',{admin1:admin1,phones:phonesToOutput})
     }
     //Тренеры
@@ -120,7 +120,7 @@ async PostAdminCreate(req,res,next)
             //   const {ID}=req.body
             const ID=req.params.id
             const newCoach=new coach(undefined,undefined,undefined,undefined,ID,undefined)
-            console.log(newCoach)
+        //    console.log(newCoach)
             const error= await newCoach.delete(sql)
             if(error){
                 return res.status(400).json({message: "Something went wrong"})
@@ -138,7 +138,7 @@ async PostAdminCreate(req,res,next)
             const sql = req.sql
             const {ID,N_passport, Name, Experience,Phones,ID_admin} = req.body
             const newCoach = new coach(N_passport, Name, Experience,Phones,ID,ID_admin)
-            console.log(newCoach.id)
+        //    console.log(newCoach.id)
             const error=    await newCoach.update(sql)
             if(error){
                 return res.status(400).json({message: "Something went wrong"})
@@ -157,7 +157,7 @@ async PostAdminCreate(req,res,next)
 
             const {N_passport, Name, Experience, Phones,ID_admin} = req.body
             const newCoach = new coach(N_passport, Name, Experience,Phones,0,ID_admin)
-            console.log(newCoach)
+        //    console.log(newCoach)
             const error= await newCoach.insert(sql)
             if(error){
                 return res.status(400).json({message: "Something went wrong"})
@@ -176,16 +176,16 @@ async PostAdminCreate(req,res,next)
         const ID=req.params.id
         const coach1=new coach(undefined,undefined,undefined,undefined,ID)
         await coach1.getInfoByID(sql)
-        console.log(coach1)
+       // console.log(coach1)
         let phonesToOutput=''
         for(const Phone of coach1.phones){
             phonesToOutput+=Phone.Phone+','
         }
         phonesToOutput=phonesToOutput.slice(0,-1)
-        console.log(phonesToOutput)
+      //  console.log(phonesToOutput)
         const admin1=new admin(undefined,undefined,undefined,undefined,coach1.id_adm)
         const allAdmins=await admin1.getAllExcept(sql)
-        console.log(allAdmins)
+      //  console.log(allAdmins)
         return res.render('coachEdit',{coach1:coach1,phones:phonesToOutput,admins:allAdmins})
     }
 }

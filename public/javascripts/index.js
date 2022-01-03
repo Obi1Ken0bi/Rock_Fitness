@@ -8,7 +8,7 @@ var photoOffset = photo.offsetTop;
 var photoBox = document.getElementById("photoBox");
 var contacts = document.getElementById("contacts");
 var contactsbox = document.getElementById("contactsBox");
-console.log(contacts.offsetTop)
+//console.log(contacts.offsetTop)
 var contactsOffset = 1822 + window.screen.height;
 
 function myFunction() {

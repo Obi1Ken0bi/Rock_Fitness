@@ -27,7 +27,7 @@ module.exports=class Contract{
     }
     async insert(sql){try {
 
-        console.log(this.dateEnd)
+     //   console.log(this.dateEnd)
         let request = new sql.Request();
         request.input('Date_Start', sql.DateTime, this.dateStart)
         request.input('Date_End', sql.DateTime, this.dateEnd)
@@ -115,10 +115,14 @@ return
             request.input('EnterNumber', sql.Int, this.enterNumber)
             request.input('Price', sql.Int, this.price)
             request.input('ID_Client',sql.Int,this.idClient)
-            request.input('ID_Admin',sql.Int,this.idAdmin)
-            request.input('ID',sql.Int,this.id)
-            await request.query('update Contract SET Date_Start=@Date_Start,Date_End=@Date_End,EnterNumber=@EnterNumber,Price=@Price,ID_Client=@ID_Client,ID_Admin=@ID_Admin WHERE ID=@ID')
 
+            request.input('ID',sql.Int,this.id)
+            if(this.idAdmin!=null) {
+                request.input('ID_Admin', sql.Int, this.idAdmin)
+                await request.query('update Contract SET Date_Start=@Date_Start,Date_End=@Date_End,EnterNumber=@EnterNumber,Price=@Price,ID_Client=@ID_Client,ID_Admin=@ID_Admin WHERE ID=@ID')
+            }else{
+                await request.query('update Contract SET Date_Start=@Date_Start,Date_End=@Date_End,EnterNumber=@EnterNumber,Price=@Price,ID_Client=@ID_Client,ID_Admin=null WHERE ID=@ID')
+            }
             }
         catch (e) {
             console.log(e)

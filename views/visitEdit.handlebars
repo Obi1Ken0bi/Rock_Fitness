@@ -1,0 +1,28 @@
+<p>
+<form name="visitEdit" id="visitCreate" method="post" action="/adminpanel/visits/edit">
+<label>
+    Клиент:
+    <select name="client">
+        <option value="{{client.id}}">{{client.name}}</option>
+        {{#each otherClients}}
+            <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+</label>
+    <label> Дата:
+        <input name="date" type="date" value="{{year}}-{{month}}-{{day}}">
+    </label>
+    <label>Тренер(Если был)
+        <select name="coach">
+            <option value="{{coach.ID}}">{{coach.Name}}</option>
+            {{#each otherCoaches}}
+                <option value="{{this.ID}}">{{this.Name}}</option>
+            {{/each}}
+        </select>
+    </label>
+    <input name="id" type="hidden" value="{{visit.id}}">
+    <input type="submit" value="Внести изменения">
+</form>
+    </p>
+
+

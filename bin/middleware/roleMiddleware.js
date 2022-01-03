@@ -14,9 +14,9 @@ module.exports = function (role1,role2=undefined) {
                 return res.status(403).json({message: 'Пользователь не авторизован'})
             }
             const decodedData = jwt.verify(token, secret)
-            console.log(decodedData)
+         //   console.log(decodedData)
             let userRole = decodedData.role
-            console.log(userRole)
+       //     console.log(userRole)
             let hasRole = false
 
                 if (userRole === role1 || userRole===role2) {
