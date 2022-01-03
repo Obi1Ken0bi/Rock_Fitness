@@ -3,7 +3,7 @@
 {{#each clients}}
     <tr>
         <td> Имя: {{this.name}}</td>
-        <td>  Возраст: {{this.age}} </td>
+        <td> Возраст: {{this.age}} </td>
         <td>Пол {{this.gender}}</td>
 
         <td>Телефоны: {{#each this.phones}}
@@ -14,12 +14,12 @@
         <td>
 
 
-                <a href="/adminpanel/clients/edit/{{this.id}}">Edit</a>|
+            <a href="/adminpanel/clients/edit/{{this.id}}">Edit</a>|
 
 
-                <form action="/adminpanel/clients/delete/{{this.id}}" method="POST" style="display:inline;">
-                    <input type="submit" value="Delete" />
-                </form>
+            <form action="/adminpanel/clients/delete/{{this.id}}" method="POST" style="display:inline;">
+                <input type="submit" value="Delete"/>
+            </form>
 
         </td>
 

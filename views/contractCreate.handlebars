@@ -8,10 +8,10 @@
         </select>
     </label>
     <label>Дата начала
-        <input name="dateStart" type="date" >
+        <input name="dateStart" type="date">
     </label>
     <label>Дата конца
-        <input name="dateEnd" type="date" >
+        <input name="dateEnd" type="date">
     </label>
     <label>Количество посещений
         <input id="n" name="enterNumber" type="number" value="100">
@@ -33,11 +33,11 @@
 
 {{#section 'scripts'}}
     <script>
-        const numberElem=document.getElementById('n')
-        const pricingElem=document.getElementById('pr')
+        const numberElem = document.getElementById('n')
+        const pricingElem = document.getElementById('pr')
 
-        numberElem.addEventListener('change',()=>{
-            pricingElem.value=numberElem.value*100
+        numberElem.addEventListener('change', () => {
+            pricingElem.value = numberElem.value * 100
         })
 
     </script>

@@ -3,16 +3,16 @@
 <br>
 Ваше имя:{{admin.name}}
 <br>
-<td>  Стаж: {{admin.experience}} </td>
+<td> Стаж: {{admin.experience}} </td>
 
 <td>Телефоны: {{#each admin.phones}}
     {{this.Phone}}
 
 {{/each}}</td>
 <form action="/list/Admin/delete/{{admin.id}}" method="POST">
-    <input type="submit" value="Удалить профиль" />
+    <input type="submit" value="Удалить профиль"/>
 </form>
 <form action="/list/Admin/edit/{{admin.id}}" method="get">
-    <input type="submit" value="Изменить профиль" />
+    <input type="submit" value="Изменить профиль"/>
 </form>
 <td>

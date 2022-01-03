@@ -5,14 +5,14 @@ const {check} = require('express-validator')
 const roleMiddleware = require('../bin/middleware/roleMiddleware')
 
 router.get('/', function (req, res, next) {
-   const sql=req.sql
-    const rofl=new sql.Request()
-     rofl.query('select count(ID) as cont from Client').then((aRolf)=> {
-      //   console.log(aRolf)
-         const pepega=aRolf.recordset[0].cont
-             res.render('home',{count:pepega});
-         }
-     )
+    const sql = req.sql
+    const rofl = new sql.Request()
+    rofl.query('select count(ID) as cont from Client').then((aRolf) => {
+            //   console.log(aRolf)
+            const pepega = aRolf.recordset[0].cont
+            res.render('home', {count: pepega});
+        }
+    )
 
 });
 router.get('/registration', function (req, res) {
@@ -23,9 +23,9 @@ router.post('/registration', [check('username1', 'Имя пользовател�
 ], controller.registration)
 router.post('/api/login', controller.login)
 router.get('/users', roleMiddleware('ADMIN'), controller.getUsers)
-router.get('/logout',(req, res) => {
+router.get('/logout', (req, res) => {
     res.clearCookie('id')
     req.session.destroy()
-    return  res.redirect('/')
+    return res.redirect('/')
 })
 module.exports = router

@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const {validationResult, body, cookie} = require('express-validator')
 const {secret} = require('./../config')
 const jwt = require('jsonwebtoken')
-const client=require('../models/client')
+const client = require('../models/client')
 const generateAccesToken = (login, role) => {
     const payload = {
         login, role
@@ -19,7 +19,7 @@ class authController {
                 return res.status(400).json({message: 'Ошибка при регистрации', errors})
             }
             const sql = req.sql
-            const {username1, password1,n_passport,name,age,gender,Phones} = req.body
+            const {username1, password1, n_passport, name, age, gender, Phones} = req.body
 
             let request = new sql.Request();
             request.input('usernameinput', sql.NVarChar(20), username1)
@@ -31,29 +31,28 @@ class authController {
             }
             const hashPassword = bcrypt.hashSync(password1, 7)
             request.input('passwordinput', sql.NVarChar(100), hashPassword)
-           // console.log(hashPassword)
+            // console.log(hashPassword)
             const userDefault = 'USER'
             request.input('userrole', sql.NVarChar(20), userDefault)
 
 
-
-                const newClient = new client(n_passport, name, age, Phones, gender)
-               const error= await newClient.insert(sql)
-            if(error){
-                return  next(error)
+            const newClient = new client(n_passport, name, age, Phones, gender)
+            const error = await newClient.insert(sql)
+            if (error) {
+                return next(error)
             }
             await request.query('insert into [User] values (@usernameinput,@passwordinput,@userrole)')
-                await newClient.getID(sql)
-                const id = newClient.id
-                //  const request1=new sql.Request()
-                request.input('username', sql.VarChar(20), username1)
-                request.input('id', sql.Int, id)
-          //      console.log('id: ' + id)
-                const err = await request.query('insert into User_Client(id,login) values(@id,@username)')
-                if(err){
-                    console.log(err)
-                    return  next(err)
-                }
+            await newClient.getID(sql)
+            const id = newClient.id
+            //  const request1=new sql.Request()
+            request.input('username', sql.VarChar(20), username1)
+            request.input('id', sql.Int, id)
+            //      console.log('id: ' + id)
+            const err = await request.query('insert into User_Client(id,login) values(@id,@username)')
+            if (err) {
+                console.log(err)
+                return next(err)
+            }
 
 
             return res.redirect('/')
@@ -66,17 +65,17 @@ class authController {
 
     async login(req, res, next) {
         try {
-          //  console.log(req.body)
+            //  console.log(req.body)
             const sql = req.sql
             let request = new sql.Request();
             const {login, password} = req.body
             request.input('usernameinput', sql.NVarChar(20), login)
             const queryResult = await request.query('select login,password,role from [User] where login like @usernameinput')
-      //      console.log(queryResult)
-            if(!queryResult.recordset[0]){
+            //      console.log(queryResult)
+            if (!queryResult.recordset[0]) {
                 return res.status(400).json({message: "Пользователь " + login + " не найден"})
             }
-               const loginFromQuery = queryResult.recordset[0].login
+            const loginFromQuery = queryResult.recordset[0].login
             if (!loginFromQuery) {
                 return res.status(400).json({message: "Пользователь " + loginFromQuery + " не найден"})
             }
@@ -87,15 +86,15 @@ class authController {
             if (!validPassword) {
                 return res.status(400).json({message: "Введен неверный пароль"})
             }
-         //   console.log(roleFromQuery)
+            //   console.log(roleFromQuery)
             const token = generateAccesToken(loginFromQuery, roleFromQuery)
-            return   res.cookie('id',token,{signed:true}).json({token})
+            return res.cookie('id', token, {signed: true}).json({token})
             //res.json({token})
 
 
         } catch (e) {
             console.log(e)
-          return   next(e)
+            return next(e)
 
         }
     }

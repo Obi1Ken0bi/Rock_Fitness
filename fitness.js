@@ -1,20 +1,20 @@
 const createError = require('http-errors')
 const express = require('express')
-const checkRole=require('./bin/middleware/roleMiddleware')
-const panelRouter=require('./routes/adminPanel')
+const checkRole = require('./bin/middleware/roleMiddleware')
+const panelRouter = require('./routes/adminPanel')
 const session = require('express-session')
 const path = require('path')
-const {secret}=require('./config')
+const {secret} = require('./config')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const expressHandlebars = require('express-handlebars')
 const indexRouter = require('./routes/index')
 const contractRouter = require('./routes/contract')
-const profileRouter=require('./routes/profile')
+const profileRouter = require('./routes/profile')
 const dbConnectMiddleWare = require('./bin/middleware/dbConnect')
 const app = express();
-const authMiddleware=require('./bin/middleware/authMiddleware')
-const listRouter=require('./routes/list')
+const authMiddleware = require('./bin/middleware/authMiddleware')
+const listRouter = require('./routes/list')
 const hbs = expressHandlebars.create({
     defaultLayout: 'main',
     helpers: {
@@ -41,19 +41,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(dbConnectMiddleWare)
 app.use(session({
-    secret:secret,
+    secret: secret,
     resave: false,
     saveUninitialized: false,
-    cookie:{signed:true}
+    cookie: {signed: true}
 }))
-app.use((req,res,next)=>{
-    req.session.role='GUEST'
+app.use((req, res, next) => {
+    req.session.role = 'GUEST'
     //console.log(req.session.role)
     return next();
 })
 app.use(authMiddleware)
 //Конец настройки
-app.use((req, res,next) => {
+app.use((req, res, next) => {
     let phones
     if (req.body.Phones) {
         phones = req.body.Phones
@@ -62,11 +62,10 @@ app.use((req, res,next) => {
     return next()
 })
 app.use('/contract', contractRouter);
-app.use('/myprofile',profileRouter)
-app.use('/list',listRouter)
-app.use('/adminpanel',checkRole('ADMIN'),panelRouter)
+app.use('/myprofile', profileRouter)
+app.use('/list', listRouter)
+app.use('/adminpanel', checkRole('ADMIN'), panelRouter)
 app.use('/', indexRouter);
-
 
 
 // catch 404 and forward to error handler

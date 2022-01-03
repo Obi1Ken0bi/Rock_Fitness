@@ -3,14 +3,14 @@
 <br>
 Ваше имя: {{client.name}}
 <br>
-<td>  Возраст: {{client.age}} </td>
+<td> Возраст: {{client.age}} </td>
 <td>Пол: {{client.gender}}</td>
 <td>Телефоны: {{#each client.phones}}
     {{this.Phone}}
 
 {{/each}}</td>
 <form action="/myprofile/delete" method="GET">
-    <input type="submit" value="Удалить профиль" />
+    <input type="submit" value="Удалить профиль"/>
 </form>
 <a href="/myprofile/edit">Изменить профиль</a>|
 <td>

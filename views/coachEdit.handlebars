@@ -13,13 +13,13 @@
         <input name="Phones" type="text" size="20" value={{{phones}}}>
     </label>
     Был нанят <select name="ID_admin">
-        <option>{{{coach1.id_adm}}}</option>
+    <option>{{{coach1.id_adm}}}</option>
     {{#each admins}}
         <option value={{{this.ID}}}>{{{this.ID}}}</option>
     {{/each}}
-    </select>
+</select>
     <input name="ID" type="hidden" value="{{{coach1.id}}}">
-    <input type="submit" />
+    <input type="submit"/>
 </form>
 </p>
 

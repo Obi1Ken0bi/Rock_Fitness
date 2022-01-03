@@ -1,16 +1,16 @@
 <a href="/adminpanel/visits/create"> Добавить посещение</a>
 <br>
 {{#each visits}}
-   Дата: {{this.Date_}}Клиент: {{this.ID_Client}}
-   {{#if this.ID_Coach}}
-   Тренер:
+    Дата: {{this.Date_}}Клиент: {{this.ID_Client}}
+    {{#if this.ID_Coach}}
+        Тренер:
 
-   {{this.ID_Coach}}
-   {{/if}}
-   Номер: {{this.ID}}
-   <a href="/adminpanel/visits/edit/{{this.ID}}">Edit</a>|
-   <form action="/adminpanel/visits/delete/{{this.ID}}" method="POST" style="display:inline;">
-       <input type="submit" value="Delete" />
-   </form>
-   <br>
+        {{this.ID_Coach}}
+    {{/if}}
+    Номер: {{this.ID}}
+    <a href="/adminpanel/visits/edit/{{this.ID}}">Edit</a>|
+    <form action="/adminpanel/visits/delete/{{this.ID}}" method="POST" style="display:inline;">
+        <input type="submit" value="Delete"/>
+    </form>
+    <br>
 {{/each}}

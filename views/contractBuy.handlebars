@@ -10,28 +10,28 @@
         <input id="n" name="enterNumber" type="number" value="100">
     </label>
     <label>Цена
-<input id="pr" name="price" type="number" value="10000" readonly>
+        <input id="pr" name="price" type="number" value="10000" readonly>
     </label>
     <br>
-<label>Введите имя администратора(Не обязательно)
-    <select name="idAdm">
-        <option value="not"> </option>
-        {{#each admins}}
-<option value={{this.ID}}>{{this.Name}}</option>
-        {{/each}}
-    </select>
+    <label>Введите имя администратора(Не обязательно)
+        <select name="idAdm">
+            <option value="not"></option>
+            {{#each admins}}
+                <option value={{this.ID}}>{{this.Name}}</option>
+            {{/each}}
+        </select>
 
-</label>
+    </label>
     <input type="submit" value="Купить">
 </form>
 
 {{#section 'scripts'}}
     <script>
-        const numberElem=document.getElementById('n')
-        const pricingElem=document.getElementById('pr')
+        const numberElem = document.getElementById('n')
+        const pricingElem = document.getElementById('pr')
 
-        numberElem.addEventListener('change',()=>{
-            pricingElem.value=numberElem.value*100
+        numberElem.addEventListener('change', () => {
+            pricingElem.value = numberElem.value * 100
         })
 
     </script>

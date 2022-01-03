@@ -1,12 +1,11 @@
-
 {{#if partials.admin}}
-<p><a href="/list/Admin/Create">Добавить администратора</a></p>
+    <p><a href="/list/Admin/Create">Добавить администратора</a></p>
 {{/if}}
 <h2>Администраторы: </h2>
 {{#each recordsAdmins}}
     <tr>
         <td> Имя: {{this.name}}</td>
-        <td>  Стаж: {{this.experience}} </td>
+        <td> Стаж: {{this.experience}} </td>
 
         <td>Телефоны: {{#each this.phones}}
             {{this.Phone}}
@@ -15,14 +14,14 @@
 
         <td>
 
-    {{#if ../partials.admin}}
-            <a href="/list/Admin/edit/{{this.id}}">Edit</a>|
+            {{#if ../partials.admin}}
+                <a href="/list/Admin/edit/{{this.id}}">Edit</a>|
 
 
-            <form action="/list/Admin/delete/{{this.id}}" method="POST" style="display:inline;">
-                <input type="submit" value="Delete" />
-            </form>
-    {{/if}}
+                <form action="/list/Admin/delete/{{this.id}}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete"/>
+                </form>
+            {{/if}}
         </td>
 
     </tr>
@@ -30,12 +29,12 @@
 {{/each}}
 <h2>Тренеры: </h2>
 {{#if partials.admin}}
-<p><a href="/list/Coach/Create">Добавить тренера</a></p>
+    <p><a href="/list/Coach/Create">Добавить тренера</a></p>
 {{/if}}
 {{#each recordsCoaches}}
     <tr>
         <td> Имя: {{this.name}}</td>
-        <td>  Стаж: {{this.experience}} </td>
+        <td> Стаж: {{this.experience}} </td>
 
         <td>Телефоны: {{#each this.phones}}
             {{this.Phone}}
@@ -49,7 +48,7 @@
 
 
                 <form action="/list/Coach/delete/{{this.id}}" method="POST" style="display:inline;">
-                    <input type="submit" value="Delete" />
+                    <input type="submit" value="Delete"/>
                 </form>
             {{/if}}
         </td>
