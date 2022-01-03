@@ -1,0 +1,41 @@
+<h1>Ваш абонемент</h1>
+<form  name="viewContract">
+    <label>Дата начала
+        <input  type="date" value="{{{yearStart}}}-{{{monthStart}}}-{{{dayStart}}}" readonly>
+    </label>
+    <label>Дата конца
+        <input  type="date" value="{{{yearEnd}}}-{{{monthEnd}}}-{{{dayEnd}}}" readonly>
+    </label>
+    <label>Количество посещений
+        <input  type="number" value={{contract.enterNumber}} readonly>
+    </label>
+    <label>Цена
+        <input   type="number" value={{contract.price}} readonly>
+    </label>
+    <br>
+    <label>Имя администратора
+        <input value="{{name}}" type="text" readonly>
+    </label>
+</form>
+<h2>Добавить посещений:</h2>
+<form action="/contract/add" method="post">
+    <label>Количество:
+    <input name="enterNumber" id="n" type="number" value="0">
+    </label>
+    <label>Будет стоить:
+    <input name="price" id="pr" type="number" value="0" readonly>
+    </label>
+    <input name="id" type="hidden" value={{{contract.id}}}>
+    <input type="submit" value="Добавить">
+</form>
+{{#section 'scripts'}}
+    <script>
+        const numberElem=document.getElementById('n')
+        const pricingElem=document.getElementById('pr')
+
+        numberElem.addEventListener('change',()=>{
+            pricingElem.value=numberElem.value*200
+        })
+
+    </script>
+{{/section}}

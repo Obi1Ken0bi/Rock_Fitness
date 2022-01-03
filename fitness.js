@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const expressHandlebars = require('express-handlebars')
 const indexRouter = require('./routes/index')
-const usersRouter = require('./routes/users')
+const contractRouter = require('./routes/contract')
 const profileRouter=require('./routes/profile')
 const dbConnectMiddleWare = require('./bin/middleware/dbConnect')
 const app = express();
@@ -59,7 +59,7 @@ app.use((req, res,next) => {
     }
     return next()
 })
-app.use('/users', usersRouter);
+app.use('/contract', contractRouter);
 app.use('/myprofile',profileRouter)
 app.use('/list',listRouter)
 app.use('/', indexRouter);
