@@ -1,11 +1,11 @@
 const sql = require('mssql')
 const config = {
-    server: 'localhost',
-    database: 'Fitness_Club',
-    user: 'root',
-    password: 'root',
+    server: '34.65.189.252',
+    database: 'Fitness_Club2',
+    user: 'sqlserver',
+    password: 'abobusamogus',
     trustServerCertificate: true,
-    instanceName: 'mssqlserver',
+   // instanceName: 'mssqlserver',
     encrypt: true
 }
 module.exports = (req, res, next) => {

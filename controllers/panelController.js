@@ -8,16 +8,16 @@ const bcrypt = require("bcryptjs");
 
 class panelController {
     async clientsGet(req, res, next) {
-        const sql = req.sql
-        const clients = await client.getAll(sql)
+        const sql = req.sql //Сохраняем подключение к базе данных
+        const clients = await client.getAll(sql) //Получаем список всех клиентов
         const trueClients = []
         console.log(clients)
-        for (const cl of clients) {
+        for (const cl of clients) {  //Цикл, в котором каждому клиенту добавляются телефоны из таблицы Phone_Admin
             const cl1 = new client(cl.N_passport, cl.Name, cl.Age, null, cl.Gender, cl.ID)
             await cl1.getPhones(sql)
             trueClients.push(cl1)
         }
-        res.render('clientsList', {clients: trueClients})
+        res.render('clientsList', {clients: trueClients}) //Передача представления пользователю
     }
 
     async clientsEdit(req, res, next) {
@@ -46,11 +46,10 @@ class panelController {
 
     async deleteClient(req, res, next) {
         const sql = req.sql
-        const id = req.params.id
-        const client1 = new client(undefined, undefined, undefined, undefined, undefined, id)
-        await client1.delete(sql)
-        // await request.query('delete from [User] where login=@login')
-        res.redirect('/adminpanel/clients')
+        const id = req.params.id //id клиента на удаление получается из адресной строки
+        const client1 = new client(undefined, undefined, undefined, undefined, undefined, id) //Создается модель клиента с таким id
+        await client1.delete(sql)//Вызывается метод удаления модели
+        res.redirect('/adminpanel/clients') //Перенаправление на список клиентов
     }
 
     async createClient(req, res, next) {

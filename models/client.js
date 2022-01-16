@@ -10,10 +10,7 @@ module.exports = class Client {
 
     static async getAll(sql) {
         let request = new sql.Request();
-        const result = await request.query('select * from Client')
-
-        //const result2=result.recordset
-
+        const result = await request.query('select * from Client') //запрос
         return result.recordset
     }
 
@@ -112,23 +109,23 @@ module.exports = class Client {
 
             //    await  this.getID(sql)
             let request = new sql.Request()
-            request.input('ID', sql.Int, this.id)
-            await request.query('delete from Client where ID=@ID')
+            request.input('ID', sql.Int, this.id) //Ввод id в запрос
+            await request.query('delete from Client where ID=@ID') //Запрос
 
-        } catch (e) {
+        } catch (e) { //Обработчик ошибок
             return e
         }
     }
 
     async getPhones(sql) {
-        await this.getID(sql)
+        await this.getID(sql) //получаем ID клиента
         //  console.log(this)
         let request = new sql.Request()
-        request.input('ID', sql.Int, this.id)
-        const result = await request.query('select Phone from Phone_Client where ID=@ID')
+        request.input('ID', sql.Int, this.id) //Ввод переменной в запрос
+        const result = await request.query('select Phone from Phone_Client where ID=@ID') //Запрос
         //  console.log(result.recordset)
 
-        this.phones = result.recordset
+        this.phones = result.recordset //Телефоны клиента=результат запроса
         // console.log(this)
         return this.phones
 
