@@ -3,16 +3,14 @@
 /**
  * Module dependencies.
  */
-
-var app = require('../fitness');
-var debug = require('debug')('kp-fitness:server');
-var http = require('http');
+const app = require('../fitness');
+const debug = require('debug')('kp-fitness:server');
+const http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
-
-var port = normalizePort(process.env.PORT || '80');
+const port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 /**
